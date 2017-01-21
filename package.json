@@ -1,7 +1,7 @@
 {
   "name": "hack_yale",
   "version": "1.0.0",
-  "description": "",
+  "description": "Yale Hackathon '17",
   "main": "server.js",
   "scripts": {
     "clean": "rm -rf lib/models",

@@ -1,0 +1,24 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'New Request'
+
+block content
+  h1 New Request
+
+  if error
+    p ERROR: #{error}
+
+  form(method="post")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    
+    span Request title:
+    input(type="text", name="reqtitle", autofocus, maxlength=20, placeholder="20 characters max", required=true)
+    br
+
+    span Request content:
+    br
+    textarea(name="reqdata", rows='10', cols='50', maxlength=500, autofocus, placeholder="500 characters max", required=true)
+    br
+    
+    input(type="submit", value="Submit Request")

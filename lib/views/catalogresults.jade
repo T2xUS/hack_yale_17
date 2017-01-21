@@ -1,0 +1,56 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Catalog Results'
+
+// NOT WORKING, CAN'T FILTER OUT EMPTY FIELDS
+scripts.
+  var disableEmptyInputs = function(form) {
+    var allInputs = form.getElementsByTagName('input');
+    var input, i;
+    for(i = 0; input = allInputs[i]; i++) {
+      if(input.getAttribute('name') && input.value == 0) {
+          input.setAttribute('name', '');
+      }
+    }
+  }
+
+block content
+
+  h1 Catalog Results
+
+  if error
+    p ERROR: #{error}
+
+  form(method="POST", onSubmit='return disableEmptyInputs(this);')
+    input(type="hidden", name="_csrf", value=csrfToken)
+
+    if catalog != undefined
+      if catalog[0] != undefined
+        p.
+          Select items to add to kit. If there are too many items, you may want to do a more refined search, since it may result in too high of a payload for HTTP to handle (all the items are processed in).
+
+        input(type="submit", name="add", value="Add to Kit")
+
+        table(border='1')
+          thead
+            tr
+              th Name
+              th Description
+              th Datasheet
+              th Quantity
+          tbody
+            for entry in catalog
+              tr
+                for value, key in entry
+                  // Do not list etid in table, only used to track selection
+                  if key != 'etid' 
+                    td=value
+                td
+                  input(type="number", min='0', max='99', required=false, name=entry.etid, id=entry.etid, value=0)
+
+        input(type="submit", name="add", value="Add to Kit")
+
+      else
+        p.
+          No matches found. 

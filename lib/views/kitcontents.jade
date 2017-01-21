@@ -1,0 +1,55 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Kit Contents'
+
+block content
+
+  h1 Kit Contents
+
+  if error
+    p ERROR: #{error}
+
+  form(method="POST")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    if kitentries != undefined
+      if kitentries[0] != undefined
+        p.
+          Contents of Kit #{kitname}:
+        table(border='1')
+          thead
+            tr
+              th
+              th Equipment Type
+              th Description
+              th Quantity
+              th Select
+            tbody
+            for kitentry in kitentries
+              tr
+                td
+                  input(type="submit", class="btn btn-lg btn-primary btn-block", name=kitentry.etid, id=kitentry.etid, value="View Equipment Page")
+
+                for value, key in kitentry
+                  // Do not list kitname, etid in table, only used to track selection
+                  if key != 'kitname' && key != 'etid'
+                    td=value
+
+                td
+                  input(type="checkbox", name=kitentry.etid, id=kitentry.etid)
+
+        br
+        input(type="submit", onClick="return confirm('Are you sure you want to delete these entries from the kit?')", name="delete", value="Delete Selected")
+
+      else
+        p.
+          Kit #{kitname} is empty.
+
+  br
+  br
+
+  a(href='/kits/redircat')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Browse the Catalog
+
+  a(href='/kits')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Back

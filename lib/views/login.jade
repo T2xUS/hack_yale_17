@@ -1,0 +1,15 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Login'
+
+block content
+  div.wrapper
+    form.form-signin(method="post")
+      h2.form-signin-heading Log Into Your Account
+      if error
+        p ERROR: #{error}
+      input(type="hidden", name="_csrf", value=csrfToken)
+      input.form-control(type="text", name="username", placeholder="Username", required=true, autofocus)
+      input.form-control(type="password", name="password", placeholder="Password", required=true)
+      button(type="submit", class="btn btn-lg btn-primary btn-block") Login

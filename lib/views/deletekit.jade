@@ -1,0 +1,18 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Kit Delete'
+
+block content
+  h1 You created a kit!
+  p.
+    Would you like to add items to your kit or suspend your kit-making session?
+
+  br
+
+  a(href='/kits/catalog')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Add Items to Kit
+
+  a(href='/kits')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Back to Kit List
+

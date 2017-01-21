@@ -1,0 +1,24 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'New Kit'
+
+block content
+  h1 New Kit
+
+  if error
+    p ERROR: #{error}
+
+  form(method="post")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    
+    span Kit name:
+    input(type="text", name="kitname", autofocus, maxlength=50, placeholder="50 characters max", required=true)
+    br
+
+    span Kit description:
+    br
+    textarea(name="kitdesc", rows='5', cols='50', maxlength=200, autofocus, placeholder="200 characters max", required=true)
+    br
+    
+    input(type="submit", value="Create Kit")

@@ -1,0 +1,29 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Home'
+
+block content
+
+  if user
+
+    h2.text-center Welcome back, #{user.firstname}!
+
+  else
+
+    h2.text-center Welcome to the CU EE Inventory Tracker!
+  hr
+  div.jumbotron
+
+    p.
+      Ready to begin?
+    ol.lead
+      if user
+        li Registration (Already logged in!)
+        li Login (Already logged in!)
+      else
+        li
+          a(href="/register") Registration
+        li
+          a(href="/login") Login
+          

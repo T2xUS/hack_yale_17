@@ -1,0 +1,40 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Search'
+
+block content
+
+  if error
+    p ERROR: #{error}
+  br
+
+  div.container
+    div.row
+      div.col-md-12
+        div.input-group#gen-search
+          form(method="post", id="gensearch")
+            input(type="hidden", name="_csrf", value=csrfToken)
+            input.form-control(type="text", name="gensearch", placeholder="Search...")
+          div.input-group-btn
+            button.btn.btn-primary(type="submit", form="gensearch")
+              span.glyphicon.glyphicon-search(aria-hidden="true")
+        div(id="advanced-panel", class="collapse advanced-panel")
+          div.panel.panel-default
+            div.panel-body
+              form.form-horizontal(method="post", role="form" id="advsearch")
+                input(type="hidden", name="_csrf", value=csrfToken)
+                div.form-group
+                  label Location
+                  input.form-control(type="text", name="lname", placeholder="Name")
+                  input.form-control(type="text", name="lroom", placeholder="Room")
+                  input.form-control(type="text", name="ldesc", placeholder="Description")
+                div.form-group
+                  label Equipment Type
+                  input.form-control(type="text", name="etname", placeholder="Name")
+                  input.form-control(type="text", name="etcat", placeholder="Category")
+                  input.form-control(type="text", name="etdesc", placeholder="Description")
+                button(type="submit", class="btn btn-default filter-col") 
+                  span.glyphicon.glyphicon-search
+        button.btn.btn-primary.pull-right(type="button", data-toggle="collapse", data-target="#advanced-panel")
+          span.glyphicon.glyphicon-cog  Advanced-Search

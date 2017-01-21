@@ -1,0 +1,18 @@
+block vars
+  - var title
+
+doctype html
+html(lang='en')
+  head
+    block title
+      title=title ? (siteName + ' - ' + title) : siteName
+    block css
+      link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+
+    block js
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+  body
+    include navbar
+    div.container
+      block content

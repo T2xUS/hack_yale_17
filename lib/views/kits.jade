@@ -1,0 +1,52 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Kit'
+
+block content
+
+  h1 Manage Kits
+
+  if error
+    p ERROR: #{error}
+
+  // EVERYTHING WILL GO IN A BIGASS FORM FOR DELETE
+  form(method="POST")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    if kits != undefined
+      if kits[0] != undefined
+        p.
+          Your kits:
+        table(border='1')
+          thead
+            tr
+              th View Contents
+              th Kit Name
+              th Description
+              th Select
+          tbody
+            for kit in kits
+              tr
+                td
+                  input(type="submit", class="btn btn-lg btn-primary btn-block", name=kit.kitid, id=kit.kitid, value="View Kit")
+
+                for value, key in kit
+                  // Do not list kitid in table, only used to track selection
+                  if key != 'kitid'
+                    td=value
+
+                td
+                  input(type="checkbox", name=kit.kitid, id=kit.kitid)
+
+        br
+        input(type="submit", onClick="return confirm('Are you sure you want to delete these kits?')", name="delete", value="Delete Selected")
+
+      else
+        p.
+          You have no kits.
+
+  br
+  br
+
+  a(href='/kits/new')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Create a New Kit

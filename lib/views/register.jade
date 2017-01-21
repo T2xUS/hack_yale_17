@@ -1,0 +1,43 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Register'
+
+block content
+  h1 Create an Account
+
+  if error
+    p ERROR: #{error}
+
+  form.form-group(method="post")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    
+    span Username:
+    input.form-control(type="text", name="username", pattern="[A-Za-z0-9]+", maxlength=20, autofocus, placeholder="(alphanumeric, max 20 characters)", required=true)
+    br
+    
+    span First Name:
+    input.form-control(type="name", name="firstname", pattern="[A-Za-z]+", maxlength=20, placeholder="(alphabetic only)", required=true)
+    br
+    
+    span Last Name:
+    input.form-control(type="name", name="lastname", pattern="[A-Za-z]+", maxlength=20, placeholder="(alphabetic only)", required=true)
+    br
+
+    span E-mail:
+    input.form-control(type="email", name="email", maxlength=320, required=true)
+    br
+
+    span Password:
+    input.form-control(type="password", name="password", maxlength=60, required=true)
+    br
+    
+    span Student ID Number:
+    input.form-control(type="text", name="sid", min="1", max="9999999", pattern="[0-9]+", maxlength=10, placeholder="(Check bottom of your ID)", required=true)
+    br
+    
+    span Contact Phone Number:
+    input.form-control(type="tel", name="phone", maxlength=10, required=false)
+    br
+    
+    button(type="submit", class="btn btn-lg btn-primary btn-block") Register

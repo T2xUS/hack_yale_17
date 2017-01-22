@@ -1,7 +1,7 @@
 /* server.js
- * Run this using "npm run watch"
+ * Run this using "npm run start"
+ * For full clean, build, and run: "npm run all" or "npm run debug"
  */
-
 
 'use strict';
 

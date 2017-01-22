@@ -1,27 +1,28 @@
 {
-  "name": "hack_yale",
+  "name": "hack_yale_17",
   "version": "1.0.0",
   "description": "Yale Hackathon '17",
   "main": "server.js",
   "scripts": {
+    "builddb": "mysql -h localhost -u root -ptemp < hack_yale_17_db.sql",
     "clean": "rm -rf lib/models",
     "build": "node lib/gen_models.js",
     "watch": "nodemon -e js,jade",
     "start": "node server",
-    "debug:": "npm run clean && npm run build && npm run watch",
-    "all:": "npm run clean && npm run build && npm run start"
+    "debug": "npm run clean && npm run build && npm run watch",
+    "all": "npm run clean && npm run build && npm run start"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/T2XUS/hack_yale"
+    "url": "https://github.com/T2XUS/hack_yale_17"
   },
   "keywords": [],
   "author": "",
   "license": "",
   "bugs": {
-    "url": "https://github.com/T2XUS/hack_yale/issues"
+    "url": "https://github.com/T2XUS/hack_yale_17/issues"
   },
-  "homepage": "https://github.com/T2XUS/hack_yale#readme",
+  "homepage": "https://github.com/T2XUS/hack_yale_17#readme",
   "dependencies": {
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",

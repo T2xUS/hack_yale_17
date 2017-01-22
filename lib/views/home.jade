@@ -5,25 +5,11 @@ block vars
 
 block content
 
-  if user
-
-    h2.text-center Welcome back, #{user.firstname}!
-
-  else
-
-    h2.text-center Welcome to the CU EE Inventory Tracker!
+  h2.text-center Want some drugs?!
+  
   hr
-  div.jumbotron
 
-    p.
-      Ready to begin?
-    ol.lead
-      if user
-        li Registration (Already logged in!)
-        li Login (Already logged in!)
-      else
-        li
-          a(href="/register") Registration
-        li
-          a(href="/login") Login
+  div.jumbotron
+    li
+      a(href="/search") Yes
           

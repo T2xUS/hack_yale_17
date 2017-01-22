@@ -6,36 +6,31 @@ block vars
 block content
   h1 Search Results
 
-  if catalog[0] != undefined
+  // check if the first element is undefined, if it is then no entries
+  if results[0] != undefined
     p.
       Displaying matches...
     table(border='1')
       thead
         tr
-          th Name
-          th Location
-          th Room Number
-          th Description
-          th Datasheet
-          th Item Number
-          th Status
-          th Last Status Update
-        //-tr
-          //-for val, key in catalog[0]
-            //-th #{key}
+          th Drug Name
+          th Generic Name 
       tbody
-        for entry in catalog
+        for entry in results
+          // key, value of each field
+          for value, key in entry
+            if key == 'generic'
+              td
+                a(href='/search/'+value) #{value}
+            else
+              td= value
           tr
-            for field in entry
-              td= field
   else
     p.
-      No matches found. 
+      No matches found.
 
-  //-p !{packet}
-  //-p !{packet.result}
-  //-p ---
-    //-each json in packet
-      //-p Entry #{json}
-      //-each val, key in json
-        //-p #{key}: #{val}
+  br
+  a(href='/search')
+    button(type="button", class="btn btn-lg btn-primary btn-block") Go Back
+
+

@@ -8,23 +8,89 @@ block content
 
   // check if the first element is undefined, if it is then no entries
   if results[0] != undefined
-    p.
-      Displaying matches...
-    table(border='1')
-      thead
-        tr
-          th Drug Name
-          th Generic Name 
-      tbody
-        for entry in results
-          // key, value of each field
-          for value, key in entry
-            if key == 'generic'
-              td
-                a(href='/search/'+value) #{value}
-            else
-              td= value
+
+    // If the search is for brand name
+    if searchType == 'brand'
+      p.
+        Displaying matches...
+      table(border='1')
+        thead
           tr
+            th Drug Name
+            th Generic Name 
+        tbody
+          for entry in results
+            // key, value of each field
+            for value, key in entry
+              if key == 'generic'
+                td
+                  a(href='/search/'+value) #{value}
+              else
+                td= value
+            tr
+
+    // If the search is for generic names
+    if searchType == 'generic'
+      p.
+        Displaying matches...
+
+      // Find the greatest number of fields you'll need for associated brands
+      - var max = -1
+      - var count = 0
+      - var olddrug = ''
+      for entry, n in results
+        // if you get a new generic name, check if there's a new max of associated brands
+        // replace drug if appropriate
+        if entry['generic'] != olddrug
+          if count > max
+            - max = count
+            //li #{olddrug}, #{max}
+          - olddrug = entry['generic']
+          // reset count
+          - count = 0
+        // increment the current count (of associated brands) for this generic name
+        - count++
+        // if reached last field, check if it is max (since it doesn't loop around to check)
+        if n == results.length - 1
+          if count > max
+            - max = count
+
+      table(border='1')
+        thead
+          tr
+            th Generic Name
+            // One field for each drug associated with generic
+            - for (var i = 0; i < max; i++) {
+              th Brand Name #{i+1}
+            - }
+        tbody
+          - count = 0
+          - olddrug = ''
+          for entry, n in results
+            // if you get a new generic name, skip to next line
+            if entry['generic'] != olddrug
+              // fill in missing boxes
+              - for (i = count; i < max; i++) {
+                td= ''
+              - }
+              - olddrug = entry['generic']
+              - count = 0
+              tr
+            for value, key in entry
+              if key == 'dname'
+                td
+                  a(href='/search/'+value) #{value}
+              else
+                // only want to display generic name once, i.e. only when count = 0 (before you start incrementing)
+                if count == 0
+                  td= value
+            - count++;
+            // if reached last field, need to fill in missing boxes for last row
+            if n == results.length - 1
+              - for (i = count; i < max; i++) {
+                td= ''
+              - }
+
   else
     p.
       No matches found.

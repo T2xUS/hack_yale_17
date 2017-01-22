@@ -9,11 +9,22 @@ block content
     p ERROR: #{error}
   br
 
+  h1 Interested in drugs?
+  br
+  p The search bar will yield the associated generic/brand names to all matching results to the query.
+  p The dropdown menus list all of the drugs in the database. Results from searching using the dropdown menu will yield the one generic drug associated with a brand name, and all brands associated with a generic drug.
+  br
+
   div.container
     div.row
-      div.col-md-12
 
-        p Search for medication:
+      //div.col-md-12
+      div.col-md-6
+
+        h2 Brand-to-generic
+        br
+
+        p Search for medicine brand:
         div.input-group#gen-search
           form(method="post", id="gensearch")
             input.form-control(type="text", name="gensearch", placeholder="Search...")
@@ -25,15 +36,39 @@ block content
         p OR
         hr
 
-        p Select medication from dropdown:
+        p Select medicine brand from dropdown:
         div.input-group#dd-search
           form(method="post", id="ddsearch")
             select(name='ddsearch') // change back to gensearch is doesn't work
-              for drug in drugs
-                option(value=drug['dname']) #{drug['dname']}
-              //option(value='advil') Advil
-              //option(value='lol1') LOL
-              //option(value='lol2') LOL2
-              //option(value='lol3') LOL3
+              for brand in brands
+                option(value=brand['dname']) #{brand['dname']}
             button.btn.btn-primary(type="submit", form="ddsearch")
+              span.glyphicon.glyphicon-search(aria-hidden="true")
+
+      vr
+
+      div.col-md-6
+
+        h2 Generic-to-brand
+        br
+
+        p Search for generic name:
+        div.input-group#gen-search2
+          form(method="post", id="gensearch2")
+            input.form-control(type="text", name="gensearch2", placeholder="Search...")
+          div.input-group-btn
+            button.btn.btn-primary(type="submit", form="gensearch2")
+              span.glyphicon.glyphicon-search(aria-hidden="true")
+
+        hr
+        p OR
+        hr
+
+        p Select generic name from dropdown:
+        div.input-group#dd-search2
+          form(method="post", id="ddsearch2")
+            select(name='ddsearch2')
+              for generic in generics
+                option(value=generic['generic']) #{generic['generic']}
+            button.btn.btn-primary(type="submit", form="ddsearch2")
               span.glyphicon.glyphicon-search(aria-hidden="true")

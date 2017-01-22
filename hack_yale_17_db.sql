@@ -1,7 +1,5 @@
 #mysql -h localhost -u root -ptemp < hack_yale_17_db.sql
 
-
-
 DROP SCHEMA IF EXISTS `hack_yale_17` ;
 
 -- -----------------------------------------------------
@@ -18,12 +16,21 @@ CREATE TABLE IF NOT EXISTS `hack_yale_17`.`Drugs` (
   `dname` VARCHAR(100) NOT NULL, -- drug brandname
   `generic` VARCHAR(100) NOT NULL, -- generic drug name
   FULLTEXT dname_idx(`dname`),
+  FULLTEXT generic_idx(`generic`),
   PRIMARY KEY (`did`) )
 ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- CSV
+-- -----------------------------------------------------
 
 LOAD DATA LOCAL INFILE './Drug_List.csv' INTO TABLE `hack_yale_17`.`Drugs`
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r' IGNORE 0 ROWS;
 
--- CREATE FULLTEXT INDEX dname_idx ON `hack_yale_17`.`Drugs`(name);
+-- -----------------------------------------------------
+-- Convert data to lower case
+-- -----------------------------------------------------
 
+UPDATE `hack_yale_17`.`Drugs` SET `dname` = LOWER(`dname`);
+UPDATE `hack_yale_17`.`Drugs` SET `generic` = LOWER(`generic`);

@@ -1,24 +1,33 @@
-extends ./layout.jade
+        div.dropdown
+          a(data-toggle='dropdown', href='#menu1').dropdown-toogle Dropdown
+            b.caret
+          ul.dropdown-menu(role="menu")
+            li(role="presentatsion")
+                a(href="#", role="menuitem", tabindex="-1") Regular link
+            li.disabled(role="presentation")
+                a(href="#", role="menuitem", tabindex="-1") Disabled link
 
-block vars
-  - var title = 'Kit Catalog'
+        div.dropdown
+          a(data-toggle='dropdown', href='#menu1').dropdown-toogle Dropdown
+            b.caret
+          ul.dropdown-menu(role="menu")
+            li.dropdown-header(role="presentation") Header
+            li(role="presentation")
+                a(href="#", role="menuitem", tabindex="-1") Regular link
+            li.divider(role="presentation")
 
-block content
 
-  if error
-    p ERROR: #{error}
-  br
+        li(id='menu1').dropdown
+          a(data-toggle='dropdown', href='#menu1').dropdown-toogle Dropdown
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Test
+            li
+              a(href='#') Test2
 
-  div.container
-    div.row
-      div.col-md-12
-        div.input-group#gen-search
-          form(method="post", id="gensearch")
-            input(type="hidden", name="_csrf", value=csrfToken)
-            input.form-control(type="text", name="gensearch", placeholder="Search...")
-          div.input-group-btn
-            button.btn.btn-primary(type="submit", form="gensearch")
-              span.glyphicon.glyphicon-search(aria-hidden="true")
+
+
         div(id="advanced-panel", class="collapse advanced-panel")
           div.panel.panel-default
             div.panel-body

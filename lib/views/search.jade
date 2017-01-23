@@ -9,19 +9,37 @@ block content
     p ERROR: #{error}
   br
 
-  h1 Interested in drugs?
+  hr
+  h1(style = "text-align: center;") MedStop
+  hr
+
   br
   p The search bar will yield the associated generic/brand names to all matching results to the query.
   p The dropdown menus list all of the drugs in the database. Results from searching using the dropdown menu will yield the one generic drug associated with a brand name, and all brands associated with a generic drug.
-  br
+
+  hr
 
   div.container
+
+    //div.row
+
+    // Live search, in progress
+    //div.input-group#livesearch
+    //  form(method="post", id="ddsearch")
+    //    input.typeahead(type='text', name="ddsearch", placeholder='Search...')
+    //    button.btn.btn-primary(type="submit", form="ddsearch")
+    //      span.glyphicon.glyphicon-search(aria-hidden="true")
+   
+    //hr
+    //p(style = "text-align: center;") OR
+    //hr
+
     div.row
 
       //div.col-md-12
       div.col-md-6
 
-        h2 Brand-to-generic
+        h3(style = "text-align: center;") Brand-to-generic
         br
 
         p Search for medicine brand:
@@ -33,7 +51,7 @@ block content
               span.glyphicon.glyphicon-search(aria-hidden="true")
 
         hr
-        p OR
+        p(style = "text-align: center;") OR
         hr
 
         p Select medicine brand from dropdown:
@@ -49,7 +67,7 @@ block content
 
       div.col-md-6
 
-        h2 Generic-to-brand
+        h3(style = "text-align: center;") Generic-to-brand
         br
 
         p Search for generic name:
@@ -61,7 +79,7 @@ block content
               span.glyphicon.glyphicon-search(aria-hidden="true")
 
         hr
-        p OR
+        p(style = "text-align: center;") OR
         hr
 
         p Select generic name from dropdown:
@@ -72,3 +90,4 @@ block content
                 option(value=generic['generic']) #{generic['generic']}
             button.btn.btn-primary(type="submit", form="ddsearch2")
               span.glyphicon.glyphicon-search(aria-hidden="true")
+
